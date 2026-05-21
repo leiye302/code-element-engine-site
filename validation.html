@@ -79,11 +79,20 @@
         .btn-primary {
             background: var(--text-primary);
             border: 1px solid var(--text-primary);
-            color: var(--bg-color);
+            color: rgba(255, 255, 255, 1);
+            opacity: 1;
+            font-weight: 700;
         }
 
         .nav-links a.btn-primary {
-            color: #fff;
+            color: rgba(255, 255, 255, 1) !important;
+        }
+
+        .btn-primary:visited,
+        .btn-primary:active,
+        .btn-primary:focus {
+            color: rgba(255, 255, 255, 1);
+            opacity: 1;
         }
 
         .btn-secondary {
@@ -262,7 +271,7 @@
             <h1>从结构化语义到真实动作。</h1>
             <p>我们把机械臂演示与无人机测试资料单独整理在这里，让评委和客户可以直接看到项目从算法概念走向硬件验证的过程。</p>
             <a href="#robot-arm" class="btn btn-primary">查看机械臂验证</a>
-            <a href="#drone" class="btn btn-secondary" style="margin-left: 12px;">查看无人机测试</a>
+            <a href="#drone" class="btn btn-secondary" style="margin-left: 12px;">查看无人机试飞</a>
         </section>
 
         <section class="section" id="robot-arm">
@@ -295,9 +304,9 @@
         <section class="section" id="drone">
             <div class="two-column">
                 <div>
-                    <div class="eyebrow">Drone Test Environment</div>
-                    <h2>无人机测试环境</h2>
-                    <p class="copy">无人机素材用于说明码元引擎的目标不局限于单一机械臂，而是面向多形态具身智能设备。后续可继续补充飞行控制视频与任务日志。</p>
+                    <div class="eyebrow">Drone Flight Validation</div>
+                    <h2>无人机试飞视频</h2>
+                    <p class="copy">无人机试飞素材用于说明码元引擎的目标不局限于单一机械臂，而是面向多形态具身智能设备，并具备继续接入飞行控制与任务日志的空间。</p>
                     <div class="fact-list">
                         <div>
                             <span>验证方向</span>
@@ -305,15 +314,17 @@
                         </div>
                         <div>
                             <span>当前资料</span>
-                            <span>测试场地实拍</span>
+                            <span>试飞视频</span>
                         </div>
                         <div>
                             <span>后续补充</span>
-                            <span>飞行视频 / 日志</span>
+                            <span>控制接口 / 日志</span>
                         </div>
                     </div>
                 </div>
-                <img class="media-frame" src="assets/drone-demo.jpg" alt="无人机测试环境实拍">
+                <video class="media-frame" controls preload="metadata" poster="assets/drone-flight-poster.jpg">
+                    <source src="assets/drone-flight.mp4" type="video/mp4">
+                </video>
             </div>
         </section>
 

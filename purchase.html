@@ -83,7 +83,7 @@
         }
 
         .hero p {
-            max-width: 700px;
+            max-width: 720px;
             margin: 0 auto 28px;
             color: var(--text-secondary);
             font-size: 18px;
@@ -99,20 +99,30 @@
             background: #e8e8e8;
         }
 
-        .switcher span,
-        .switcher a {
+        .switcher button {
             padding: 12px 18px;
+            border: 0;
             border-radius: 999px;
+            background: transparent;
             color: #888;
+            cursor: pointer;
+            font: inherit;
             font-size: 16px;
             text-align: center;
-            text-decoration: none;
         }
 
-        .switcher .active {
+        .switcher button.active {
             background: #fff;
             color: var(--text-primary);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .panel {
+            display: none;
+        }
+
+        .panel.active {
+            display: block;
         }
 
         .pricing-grid {
@@ -180,7 +190,6 @@
         .amount {
             font-size: 64px;
             font-weight: 400;
-            letter-spacing: -1px;
         }
 
         .unit {
@@ -251,74 +260,59 @@
             font-size: 17px;
         }
 
-        .sales {
-            margin-top: 32px;
-            padding: 36px 40px;
+        .enterprise-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .enterprise-intro,
+        .sales-card {
+            padding: 40px;
             border: 1px solid var(--border-color);
             border-radius: 18px;
-            background: #fff;
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 32px;
-            align-items: center;
+            background: var(--panel-bg);
         }
 
-        .sales h2 {
-            margin-bottom: 10px;
-            font-size: 28px;
+        .enterprise-intro h2,
+        .sales-card h2 {
+            margin-bottom: 18px;
+            font-size: 34px;
             font-weight: 500;
+            line-height: 1.2;
         }
 
-        .sales p {
+        .enterprise-intro p,
+        .sales-card p {
             color: var(--text-secondary);
-            font-size: 16px;
+            font-size: 18px;
         }
 
-        .checkout {
-            margin-top: 32px;
-            padding: 36px 40px;
-            border: 1px solid var(--border-color);
-            border-radius: 18px;
-            background: #fff;
-            display: grid;
-            grid-template-columns: 1fr 0.9fr;
-            gap: 32px;
-            align-items: start;
-        }
-
-        .checkout h2 {
-            margin-bottom: 10px;
-            font-size: 28px;
-            font-weight: 500;
-        }
-
-        .checkout p {
-            color: var(--text-secondary);
-            font-size: 16px;
-        }
-
-        .order-box {
+        .enterprise-list {
+            margin-top: 34px;
             border-top: 1px solid var(--border-color);
         }
 
-        .order-box div {
+        .enterprise-list div {
             display: flex;
             justify-content: space-between;
             gap: 24px;
-            padding: 14px 0;
+            padding: 18px 0;
             border-bottom: 1px solid var(--border-color);
-            font-size: 15px;
+            font-size: 16px;
         }
 
-        .order-box span:first-child {
+        .enterprise-list span:first-child {
             color: var(--text-secondary);
         }
 
-        .copy-note {
-            min-height: 22px;
-            margin-top: 14px;
-            color: var(--text-muted);
-            font-size: 14px;
+        .sales-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: linear-gradient(180deg, var(--accent-soft), #fff 68%);
+            border-color: #cbc8ff;
         }
 
         footer {
@@ -332,8 +326,14 @@
         }
 
         @media (max-width: 1050px) {
-            .pricing-grid { grid-template-columns: 1fr; }
-            .plan-card { min-height: auto; }
+            .pricing-grid,
+            .enterprise-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .plan-card {
+                min-height: auto;
+            }
         }
 
         @media (max-width: 768px) {
@@ -343,10 +343,11 @@
             .page { padding: 20px 20px 56px; }
             .hero h1 { font-size: 38px; }
             .hero p { font-size: 16px; }
-            .plan-card { padding: 28px; border-radius: 16px; }
+            .plan-card,
+            .enterprise-intro,
+            .sales-card { padding: 28px; border-radius: 16px; }
             .plan-name { font-size: 34px; }
             .amount { font-size: 56px; }
-            .sales, .checkout { grid-template-columns: 1fr; padding: 28px; }
             footer { flex-direction: column; gap: 18px; padding: 0 20px 36px; }
         }
     </style>
@@ -357,113 +358,113 @@
         <div class="nav-links">
             <a href="index.html">产品</a>
             <a href="validation.html">实机验证</a>
-            <a href="#sales">联系销售</a>
+            <a href="contact.html">联系销售</a>
         </div>
     </nav>
 
     <main class="page">
         <section class="hero">
             <h1>购买 API 调用</h1>
-            <p>面向开发者与中小企业的标准化调用额度。框架授权与定制部署不在本页直接售卖，统一联系销售沟通。</p>
+            <p>面向开发者与中小企业的标准化调用额度。API 调用可直接扫码付款，框架授权与定制部署统一联系销售。</p>
             <div class="switcher" aria-label="购买类型">
-                <span class="active">API 调用</span>
-                <a href="#sales">企业方案</a>
+                <button class="active" type="button" data-panel="api">API 调用</button>
+                <button type="button" data-panel="enterprise">企业方案</button>
             </div>
         </section>
 
-        <section class="pricing-grid" aria-label="API 调用套餐">
-            <article class="plan-card">
-                <div class="plan-top">
-                    <div class="plan-name">免费版</div>
-                    <div class="badge">体验</div>
-                </div>
-                <div class="price">
-                    <span class="currency">¥</span>
-                    <span class="amount">0</span>
-                    <span class="unit">/ 一次性</span>
-                </div>
-                <p class="description">适合快速体验码元引擎的任务表达与基础 API 接入。</p>
-                <a class="btn plan-select" href="#checkout" data-plan="免费版" data-price="¥0" data-quota="1,000 次" data-pay-url="">申请免费额度</a>
-                <ul class="feature-list">
-                    <li><span class="icon">◇</span><span>授权调用 1,000 次</span></li>
-                    <li><span class="icon">↗</span><span>基础任务表达接口</span></li>
-                    <li><span class="icon">□</span><span>适合 Demo、课程和比赛验证</span></li>
-                    <li><span class="icon">◎</span><span>社区级接入支持</span></li>
-                </ul>
-            </article>
-
-            <article class="plan-card">
-                <div class="plan-top">
-                    <div class="plan-name">基础版</div>
-                    <div class="badge">常用</div>
-                </div>
-                <div class="price">
-                    <span class="currency">¥</span>
-                    <span class="amount">999</span>
-                    <span class="unit">/ 套餐</span>
-                </div>
-                <p class="description">适合小规模产品验证、机器人应用原型和团队内部试点。</p>
-                <a class="btn plan-select" href="#checkout" data-plan="基础版" data-price="¥999" data-quota="10 万次" data-pay-url="">购买基础版</a>
-                <ul class="feature-list">
-                    <li><span class="icon">◇</span><span>授权调用 10 万次</span></li>
-                    <li><span class="icon">↗</span><span>AIDL 任务表达接口</span></li>
-                    <li><span class="icon">□</span><span>调用日志与错误信息返回</span></li>
-                    <li><span class="icon">◎</span><span>邮件技术支持</span></li>
-                </ul>
-            </article>
-
-            <article class="plan-card featured">
-                <div class="plan-top">
-                    <div class="plan-name">专业版</div>
-                    <div class="badge">推荐</div>
-                </div>
-                <div class="price">
-                    <span class="currency">¥</span>
-                    <span class="amount">8999</span>
-                    <span class="unit">/ 套餐</span>
-                </div>
-                <p class="description">适合企业级 PoC、连续演示和更高频的 API 接入验证。</p>
-                <a class="btn btn-accent plan-select" href="#checkout" data-plan="专业版" data-price="¥8999" data-quota="100 万次" data-pay-url="">购买专业版</a>
-                <ul class="feature-list">
-                    <li><span class="icon">◇</span><span>授权调用 100 万次</span></li>
-                    <li><span class="icon">↗</span><span>高频 API 调用额度</span></li>
-                    <li><span class="icon">□</span><span>演示场景接入建议</span></li>
-                    <li><span class="icon">◎</span><span>优先级技术支持</span></li>
-                </ul>
-            </article>
-        </section>
-
-        <section class="checkout" id="checkout">
-            <div>
-                <h2>API 购买确认</h2>
-                <p>选择套餐后，这里会生成一段购买信息，便于发送给团队开通 API Key。正式支付、发票与密钥交付由团队确认。</p>
-            </div>
-            <div>
-                <div class="order-box">
-                    <div>
-                        <span>当前套餐</span>
-                        <span id="order-plan">专业版</span>
+        <section class="panel active" id="api-panel" aria-label="API 调用套餐">
+            <div class="pricing-grid">
+                <article class="plan-card">
+                    <div class="plan-top">
+                        <div class="plan-name">免费版</div>
+                        <div class="badge">体验</div>
                     </div>
-                    <div>
-                        <span>套餐价格</span>
-                        <span id="order-price">¥8999</span>
+                    <div class="price">
+                        <span class="currency">¥</span>
+                        <span class="amount">0</span>
+                        <span class="unit">/ 一次性</span>
                     </div>
-                    <div>
-                        <span>调用额度</span>
-                        <span id="order-quota">100 万次</span>
+                    <p class="description">适合快速体验码元引擎的任务表达与基础 API 接入。</p>
+                    <a class="btn" href="contact.html">申请免费额度</a>
+                    <ul class="feature-list">
+                        <li><span class="icon">◇</span><span>授权调用 1,000 次</span></li>
+                        <li><span class="icon">↗</span><span>基础任务表达接口</span></li>
+                        <li><span class="icon">□</span><span>适合 Demo、课程和比赛验证</span></li>
+                        <li><span class="icon">◎</span><span>添加微信后开通额度</span></li>
+                    </ul>
+                </article>
+
+                <article class="plan-card">
+                    <div class="plan-top">
+                        <div class="plan-name">基础版</div>
+                        <div class="badge">常用</div>
                     </div>
-                </div>
-                <button class="btn btn-accent" id="copy-order" type="button" style="margin-top: 24px;">复制购买信息</button>
-                <p class="copy-note" id="copy-note"></p>
+                    <div class="price">
+                        <span class="currency">¥</span>
+                        <span class="amount">999</span>
+                        <span class="unit">/ 套餐</span>
+                    </div>
+                    <p class="description">适合小规模产品验证、机器人应用原型和团队内部试点。</p>
+                    <a class="btn" href="payment.html?plan=basic">购买基础版</a>
+                    <ul class="feature-list">
+                        <li><span class="icon">◇</span><span>授权调用 10 万次</span></li>
+                        <li><span class="icon">↗</span><span>AIDL 任务表达接口</span></li>
+                        <li><span class="icon">□</span><span>调用日志与错误信息返回</span></li>
+                        <li><span class="icon">◎</span><span>付款后联系团队开通</span></li>
+                    </ul>
+                </article>
+
+                <article class="plan-card featured">
+                    <div class="plan-top">
+                        <div class="plan-name">专业版</div>
+                        <div class="badge">推荐</div>
+                    </div>
+                    <div class="price">
+                        <span class="currency">¥</span>
+                        <span class="amount">8999</span>
+                        <span class="unit">/ 套餐</span>
+                    </div>
+                    <p class="description">适合企业级 PoC、连续演示和更高频的 API 接入验证。</p>
+                    <a class="btn btn-accent" href="payment.html?plan=pro">购买专业版</a>
+                    <ul class="feature-list">
+                        <li><span class="icon">◇</span><span>授权调用 100 万次</span></li>
+                        <li><span class="icon">↗</span><span>高频 API 调用额度</span></li>
+                        <li><span class="icon">□</span><span>演示场景接入建议</span></li>
+                        <li><span class="icon">◎</span><span>优先级开通支持</span></li>
+                    </ul>
+                </article>
             </div>
         </section>
 
-        <section class="sales" id="sales">
-            <div>
-                <h2>框架授权与定制部署</h2>
-                <p>面向机器人厂商、系统集成商和大型行业客户。框架授权、私有化部署、产线级集成与长期运维合同均需联系销售确认需求。</p>
+        <section class="panel" id="enterprise-panel" aria-label="企业方案">
+            <div class="enterprise-grid">
+                <div class="enterprise-intro">
+                    <h2>框架授权与定制部署</h2>
+                    <p>面向机器人厂商、系统集成商和大型行业客户。此类方案涉及设备数量、部署环境、源码支持、培训和长期运维，需先沟通需求后报价。</p>
+                    <div class="enterprise-list">
+                        <div>
+                            <span>框架授权</span>
+                            <span>机器人厂商 / 系统集成商</span>
+                        </div>
+                        <div>
+                            <span>定制部署</span>
+                            <span>试点项目 / 产线级 / 工厂级</span>
+                        </div>
+                        <div>
+                            <span>交付内容</span>
+                            <span>私有化、集成、培训、运维</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="sales-card">
+                    <div>
+                        <div class="badge" style="display: inline-block; margin-bottom: 24px;">联系销售</div>
+                        <h2>把需求发给我们。</h2>
+                        <p>扫码添加微信，说明设备类型、计划调用场景和预计部署规模，我们会按项目给出方案。</p>
+                    </div>
+                    <a class="btn btn-accent" href="contact.html" style="margin-top: 32px;">查看销售微信</a>
+                </div>
             </div>
-            <a class="btn btn-accent" style="width: auto; min-width: 180px;" href="https://github.com/leiye302/CodeElement-Engine" target="_blank" rel="noopener noreferrer">联系销售</a>
         </section>
     </main>
 
@@ -473,37 +474,22 @@
             <a href="index.html" style="color: inherit; text-decoration: none;">返回首页</a>
         </div>
     </footer>
+
     <script>
-        const planButtons = document.querySelectorAll('.plan-select');
-        const orderPlan = document.querySelector('#order-plan');
-        const orderPrice = document.querySelector('#order-price');
-        const orderQuota = document.querySelector('#order-quota');
-        const copyButton = document.querySelector('#copy-order');
-        const copyNote = document.querySelector('#copy-note');
+        const switchButtons = document.querySelectorAll('.switcher button');
+        const panels = {
+            api: document.querySelector('#api-panel'),
+            enterprise: document.querySelector('#enterprise-panel')
+        };
 
-        planButtons.forEach((button) => {
-            button.addEventListener('click', (event) => {
-                if (button.dataset.payUrl) {
-                    event.preventDefault();
-                    window.location.href = button.dataset.payUrl;
-                    return;
-                }
-
-                orderPlan.textContent = button.dataset.plan;
-                orderPrice.textContent = button.dataset.price;
-                orderQuota.textContent = button.dataset.quota;
-                copyNote.textContent = '';
+        switchButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                const target = button.dataset.panel;
+                switchButtons.forEach((item) => item.classList.toggle('active', item === button));
+                Object.entries(panels).forEach(([key, panel]) => {
+                    panel.classList.toggle('active', key === target);
+                });
             });
-        });
-
-        copyButton.addEventListener('click', async () => {
-            const message = `码元引擎 API 调用购买意向：${orderPlan.textContent}，价格 ${orderPrice.textContent}，调用额度 ${orderQuota.textContent}。`;
-            try {
-                await navigator.clipboard.writeText(message);
-                copyNote.textContent = '购买信息已复制。';
-            } catch (error) {
-                copyNote.textContent = message;
-            }
         });
     </script>
 </body>

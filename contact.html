@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>联系销售 - 码元引擎</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --bg-color: #f7f7f7;
+            --panel-bg: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --border-color: #e4e4e4;
+            --accent: #9b98f2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+        }
+
+        .logo {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .page {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 52px 48px 92px;
+        }
+
+        .contact-panel {
+            display: grid;
+            grid-template-columns: 0.95fr 1.05fr;
+            gap: 44px;
+            align-items: center;
+            padding: 44px;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            background: var(--panel-bg);
+        }
+
+        .eyebrow {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        h1 {
+            margin-bottom: 24px;
+            font-size: 48px;
+            font-weight: 500;
+            line-height: 1.15;
+        }
+
+        p {
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+
+        .qr-card {
+            padding: 28px;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            background: #fff;
+        }
+
+        .qr-card img {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+
+        .btn-row {
+            margin-top: 32px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 22px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            background: #fff;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-accent {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: #fff;
+        }
+
+        footer {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 0 48px 48px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 20px; }
+            .logo { font-size: 16px; }
+            .nav-links a:not(:last-child) { display: none; }
+            .page { padding: 24px 20px 64px; }
+            .contact-panel { grid-template-columns: 1fr; padding: 28px; }
+            h1 { font-size: 38px; }
+            p { font-size: 16px; }
+            .btn-row { flex-direction: column; }
+            footer { flex-direction: column; gap: 18px; padding: 0 20px 36px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="logo" href="index.html">码元引擎 (Code Element Engine)</a>
+        <div class="nav-links">
+            <a href="purchase.html">购买</a>
+            <a href="validation.html">实机验证</a>
+            <a href="index.html">返回首页</a>
+        </div>
+    </nav>
+
+    <main class="page">
+        <section class="contact-panel">
+            <div>
+                <div class="eyebrow">Sales Contact</div>
+                <h1>添加微信，继续沟通。</h1>
+                <p>用于框架授权、定制部署、API 开通确认与企业合作沟通。扫码添加后，请备注“码元引擎”。</p>
+                <div class="btn-row">
+                    <a class="btn btn-accent" href="purchase.html">返回购买页</a>
+                    <a class="btn" href="index.html">返回首页</a>
+                </div>
+            </div>
+            <div class="qr-card">
+                <img src="assets/wechat-contact.jpg" alt="销售微信二维码">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>© 2026 北京邮电大学 码元引擎团队</div>
+        <div>Code Element Engine</div>
+    </footer>
+</body>
+</html>

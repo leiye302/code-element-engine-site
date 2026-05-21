@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>微信支付 - 码元引擎</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --bg-color: #f7f7f7;
+            --panel-bg: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --border-color: #e4e4e4;
+            --accent: #9b98f2;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+        }
+
+        .logo {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .page {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 52px 48px 92px;
+        }
+
+        .pay-panel {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 44px;
+            align-items: center;
+            padding: 44px;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            background: var(--panel-bg);
+        }
+
+        .eyebrow {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        h1 {
+            margin-bottom: 24px;
+            font-size: 48px;
+            font-weight: 500;
+            line-height: 1.15;
+        }
+
+        .desc {
+            margin-bottom: 32px;
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+
+        .order {
+            border-top: 1px solid var(--border-color);
+        }
+
+        .order div {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 16px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 16px;
+        }
+
+        .order span:first-child {
+            color: var(--text-secondary);
+        }
+
+        .qr-card {
+            padding: 28px;
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            background: #fff;
+        }
+
+        .qr-card img {
+            width: 100%;
+            display: block;
+            border-radius: 12px;
+        }
+
+        .btn-row {
+            margin-top: 32px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 13px 22px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            background: #fff;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+
+        .btn-accent {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: #fff;
+        }
+
+        footer {
+            max-width: 1120px;
+            margin: 0 auto;
+            padding: 0 48px 48px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 20px; }
+            .logo { font-size: 16px; }
+            .nav-links a:not(:last-child) { display: none; }
+            .page { padding: 24px 20px 64px; }
+            .pay-panel { grid-template-columns: 1fr; padding: 28px; }
+            h1 { font-size: 38px; }
+            .desc { font-size: 16px; }
+            .btn-row { flex-direction: column; }
+            footer { flex-direction: column; gap: 18px; padding: 0 20px 36px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="logo" href="index.html">码元引擎 (Code Element Engine)</a>
+        <div class="nav-links">
+            <a href="purchase.html">返回购买页</a>
+            <a href="contact.html">联系销售</a>
+        </div>
+    </nav>
+
+    <main class="page">
+        <section class="pay-panel">
+            <div>
+                <div class="eyebrow">WeChat Pay</div>
+                <h1>扫码完成付款</h1>
+                <p class="desc">请使用微信扫码付款。付款完成后，添加销售微信或备注联系方式，团队会协助开通 API 调用额度。</p>
+                <div class="order">
+                    <div>
+                        <span>当前套餐</span>
+                        <span id="plan-name">基础版</span>
+                    </div>
+                    <div>
+                        <span>套餐价格</span>
+                        <span id="plan-price">¥999</span>
+                    </div>
+                    <div>
+                        <span>调用额度</span>
+                        <span id="plan-quota">10 万次</span>
+                    </div>
+                </div>
+                <div class="btn-row">
+                    <a class="btn btn-accent" href="contact.html">付款后联系销售</a>
+                    <a class="btn" href="purchase.html">返回选择套餐</a>
+                </div>
+            </div>
+            <div class="qr-card">
+                <img src="assets/wechat-payment.jpg" alt="微信收款二维码">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>© 2026 北京邮电大学 码元引擎团队</div>
+        <div>
+            <a href="index.html" style="color: inherit; text-decoration: none;">返回首页</a>
+        </div>
+    </footer>
+
+    <script>
+        const plans = {
+            basic: { name: '基础版', price: '¥999', quota: '10 万次' },
+            pro: { name: '专业版', price: '¥8999', quota: '100 万次' }
+        };
+
+        const params = new URLSearchParams(window.location.search);
+        const plan = plans[params.get('plan')] || plans.basic;
+
+        document.querySelector('#plan-name').textContent = plan.name;
+        document.querySelector('#plan-price').textContent = plan.price;
+        document.querySelector('#plan-quota').textContent = plan.quota;
+        document.title = `${plan.name}微信支付 - 码元引擎`;
+    </script>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>码元引擎 - 通用具身智能感知与决策模块</title>
+    <style>
+        /* 引入类似 OpenAI 的极简字体 (Inter) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --bg-color: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #555555;
+            --border-color: #e5e5e5;
+            --code-bg: #f9f9f9;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* 导航栏 */
+        nav {
+            display: flex;
+            justify-content: space-between; /* 保持 Logo 在左，群组在右 */
+            align-items: center;
+            padding: 24px 48px;
+            border-bottom: 1px solid transparent;
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        /* 新增：右侧元素的组合容器 */
+        .nav-right-group {
+            display: flex;
+            align-items: center;
+            gap: 32px; /* 文本链接与黑色按钮之间的间距 */
+        }
+
+        /* 调整导航链接布局，使用 gap 替代 margin */
+        .nav-links {
+            display: flex;
+            gap: 32px; /* 文本链接内部的间距 */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* 按钮组件 */
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            font-size: 15px;
+            font-weight: 500;
+            border-radius: 4px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-primary {
+            background-color: var(--text-primary);
+            color: var(--bg-color);
+            border: 1px solid var(--text-primary);
+        }
+
+        .btn-primary:hover {
+            background-color: #333333;
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--text-primary);
+        }
+
+        /* 为销售按钮独立设置精简样式 */
+        .btn-sales {
+            padding: 8px 16px;
+            font-size: 13px;
+        }
+
+        /* 首屏 (Hero Section) */
+        .hero {
+            max-width: 900px;
+            margin: 120px auto 100px;
+            padding: 0 24px;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 72px;
+            font-weight: 700;
+            letter-spacing: -2.5px;
+            line-height: 1.1;
+            margin-bottom: 32px;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: var(--text-secondary);
+            margin-bottom: 48px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 300;
+        }
+
+        .hero-btns {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+
+        /* 核心展示区 */
+        .section-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 100px 48px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .showcase {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .showcase-text h2 {
+            font-size: 40px;
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+            line-height: 1.2;
+        }
+
+        .showcase-text p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 32px;
+        }
+
+        .code-block {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 32px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 15px;
+            line-height: 1.7;
+            color: #333;
+            overflow-x: auto;
+        }
+
+        .code-block .keyword { color: #d73a49; }
+        .code-block .function { color: #6f42c1; }
+        .code-block .string { color: #032f62; }
+        .code-block .comment { color: #6a737d; }
+
+        /* 特性网格 */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 48px;
+            margin-top: 60px;
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .feature-card p {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        /* 底部 CTA 与 Footer */
+        .cta-section {
+            text-align: center;
+            padding: 120px 24px;
+            background-color: #000;
+            color: #fff;
+        }
+
+        .cta-section h2 {
+            font-size: 48px;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
+        }
+
+        .cta-section p {
+            font-size: 20px;
+            color: #a1a1aa;
+            margin-bottom: 40px;
+        }
+
+        footer {
+            padding: 48px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--border-color);
+            font-size: 14px;
+            color: var(--text-secondary);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 响应式适配 */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 48px; }
+            .showcase, .features-grid { grid-template-columns: 1fr; gap: 40px; }
+            nav { padding: 20px; }
+            .nav-links { display: none; }
+            .section-container { padding: 60px 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">码元引擎 (Code Element Engine)</div>
+        <div class="nav-right-group">
+            <div class="nav-links">
+                <a href="#product">产品</a>
+                <a href="#research">技术底层</a>
+                <a href="#pricing">部署方案</a>
+            </div>
+            <a href="#" class="btn btn-primary btn-sales">联系销售</a>
+        </div>
+    </nav>
+
+    <div class="hero">
+        <h1>赋予机器人统一的<br>代码级理解力。</h1>
+        <p>基于结构化代码表达的通用感知与决策架构。将复杂的物理世界降维，让具身智能的开发、迁移与规模化部署变得前所未有的简单。</p>
+        <div class="hero-btns">
+            <a href="#" class="btn btn-primary">预约企业演示</a>
+            <a href="#" class="btn btn-secondary">阅读技术白皮书</a>
+        </div>
+    </div>
+
+    <div class="section-container" id="product">
+        <div class="showcase">
+            <div class="showcase-text">
+                <h2>结构化语义，<br>打破硬件孤岛。</h2>
+                <p>借助码元引擎的核心 AIDL 框架，开发者无需关心底层机械臂的型号与异构系统的差异。通过高度抽象的代码动词，直接指挥机器执行复杂任务。</p>
+                <p>系统自动将语言转化为包含 Scene、Object 和 Context 的深层表征，实现跨平台的零成本迁移。</p>
+                <a href="#" style="color: #000; font-weight: 600; text-decoration: none; border-bottom: 1px solid #000;">查看 API 文档 ↗</a>
+            </div>
+            <div class="code-block">
+                <span class="comment"># 码元引擎通用任务表达接口示例</span><br><br>
+                <span class="keyword">def</span> <span class="function">industrial_sorting_task</span>():<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># 环境感知与目标锁定</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;target = engine.<span class="function">detect</span>(<span class="string">"defective_part_A"</span>)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> target.confidence > <span class="string">0.95</span>:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># 跨设备统一执行语义</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;engine.<span class="function">move_to</span>(target.coordinates)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;engine.<span class="function">grasp</span>(force=<span class="string">"45N"</span>, precision=<span class="string">"high"</span>)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;engine.<span class="function">place_in</span>(bin=<span class="string">"recycle_zone"</span>)<br>
+                <br>
+                <span class="function">industrial_sorting_task</span>()
+            </div>
+        </div>
+    </div>
+
+    <div class="section-container">
+        <h2 style="font-size: 32px; letter-spacing: -1px; text-align: center; margin-bottom: 20px;">解决规模化落地的核心壁垒</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>高度解耦，即插即用</h3>
+                <p>标准化的输入输出协议，彻底终结算法模块与执行硬件割裂的现状。缩短80%的工程适配周期。</p>
+            </div>
+            <div class="feature-card">
+                <h3>过程白盒化，安全可控</h3>
+                <p>所有决策均转化为可追溯的代码执行日志。具备完善的错误捕获与状态回滚机制，保障生产线绝对安全。</p>
+            </div>
+            <div class="feature-card">
+                <h3>多模态深度对齐</h3>
+                <p>内置自主研发的 VLA（视觉-语言-动作）模型底层技术，精准理解单位、时间与空间坐标，消除指令歧义。</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-section" id="pricing">
+        <h2>准备好智能化升级了吗？</h2>
+        <p>无论是工厂产线的私有化部署，还是机器人生态的 API 接入，我们提供灵活的解决方案。</p>
+        <a href="#" class="btn btn-primary" style="background-color: #fff; color: #000; border: none; padding: 16px 32px; font-size: 16px;">联系企业级销售与支持</a>
+    </div>
+
+    <footer>
+        <div>© 2026 北京邮电大学 码元引擎团队</div>
+        <div style="display: flex; gap: 24px;">
+            <a href="#" style="color: inherit; text-decoration: none;">隐私政策</a>
+            <a href="#" style="color: inherit; text-decoration: none;">服务条款</a>
+        </div>
+    </footer>
+
+</body>
+</html>

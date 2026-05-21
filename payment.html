@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>微信支付 - 码元引擎</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -39,10 +40,26 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             color: var(--text-primary);
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
+            letter-spacing: -0.3px;
             text-decoration: none;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+            flex: 0 0 auto;
+            object-fit: contain;
+        }
+
+        .logo span {
+            line-height: 1;
+            white-space: nowrap;
         }
 
         .nav-links {
@@ -173,6 +190,7 @@
         @media (max-width: 768px) {
             nav { padding: 20px; }
             .logo { font-size: 16px; }
+            .logo img { width: 28px; height: 28px; }
             .nav-links a:not(:last-child) { display: none; }
             .page { padding: 24px 20px 64px; }
             .pay-panel { grid-template-columns: 1fr; padding: 28px; }
@@ -185,7 +203,10 @@
 </head>
 <body>
     <nav>
-        <a class="logo" href="index.html">码元引擎 (Code Element Engine)</a>
+        <a class="logo" href="index.html" aria-label="码元引擎首页">
+            <img src="assets/code-element-logo.png" alt="">
+            <span>码元引擎</span>
+        </a>
         <div class="nav-links">
             <a href="purchase.html">返回购买页</a>
             <a href="contact.html">联系销售</a>

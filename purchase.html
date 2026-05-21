@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>购买 API 调用 - 码元引擎</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -42,10 +43,26 @@
         }
 
         .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             color: var(--text-primary);
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
+            letter-spacing: -0.3px;
             text-decoration: none;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+            flex: 0 0 auto;
+            object-fit: contain;
+        }
+
+        .logo span {
+            line-height: 1;
+            white-space: nowrap;
         }
 
         .nav-links {
@@ -349,6 +366,7 @@
         @media (max-width: 768px) {
             nav { padding: 20px; }
             .logo { font-size: 16px; }
+            .logo img { width: 28px; height: 28px; }
             .nav-links a:not(:last-child) { display: none; }
             .page { padding: 20px 20px 56px; }
             .hero h1 { font-size: 38px; }
@@ -364,7 +382,10 @@
 </head>
 <body>
     <nav>
-        <a class="logo" href="index.html">码元引擎 (Code Element Engine)</a>
+        <a class="logo" href="index.html" aria-label="码元引擎首页">
+            <img src="assets/code-element-logo.png" alt="">
+            <span>码元引擎</span>
+        </a>
         <div class="nav-links">
             <a href="index.html">产品</a>
             <a href="validation.html">实机验证</a>

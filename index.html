@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>码元引擎 - 通用具身智能感知与决策模块</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
     <style>
         /* 引入类似 OpenAI 的极简字体 (Inter) */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -46,9 +47,26 @@
         }
 
         .logo {
-            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text-primary);
+            font-size: 18px;
             font-weight: 700;
-            letter-spacing: -0.5px;
+            letter-spacing: -0.3px;
+            text-decoration: none;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+            flex: 0 0 auto;
+            object-fit: contain;
+        }
+
+        .logo span {
+            line-height: 1;
+            white-space: nowrap;
         }
 
         /* 新增：右侧元素的组合容器 */
@@ -353,6 +371,7 @@
             .hero { margin: 88px auto 72px; }
             .hero p, .section-intro { font-size: 18px; }
             .repo-panel h2 { font-size: 32px; }
+            .logo img { width: 28px; height: 28px; }
             footer { flex-direction: column; gap: 20px; padding: 32px 24px; }
         }
     </style>
@@ -360,7 +379,10 @@
 <body>
 
     <nav>
-        <div class="logo">码元引擎 (Code Element Engine)</div>
+        <a class="logo" href="index.html" aria-label="码元引擎首页">
+            <img src="assets/code-element-logo.png" alt="">
+            <span>码元引擎</span>
+        </a>
         <div class="nav-right-group">
             <div class="nav-links">
                 <a href="#product">产品</a>

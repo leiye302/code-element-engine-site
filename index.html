@@ -14,6 +14,7 @@
             --text-secondary: #555555;
             --border-color: #e5e5e5;
             --code-bg: #f9f9f9;
+            --muted-bg: #f7f7f7;
         }
 
         * {
@@ -85,6 +86,7 @@
             text-decoration: none;
             cursor: pointer;
             transition: all 0.2s ease;
+            white-space: nowrap;
         }
 
         .btn-primary {
@@ -210,6 +212,92 @@
             color: var(--text-secondary);
         }
 
+        .section-heading {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 1.2;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .section-intro {
+            max-width: 680px;
+            margin: 0 auto 56px;
+            color: var(--text-secondary);
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .demo-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 32px;
+        }
+
+        .demo-card {
+            border-top: 1px solid var(--border-color);
+            padding-top: 24px;
+        }
+
+        .demo-card h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .demo-card p {
+            color: var(--text-secondary);
+            font-size: 16px;
+            margin-bottom: 24px;
+        }
+
+        .media-frame {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            display: block;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--muted-bg);
+            object-fit: cover;
+        }
+
+        .repo-panel {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .repo-panel h2 {
+            font-size: 40px;
+            line-height: 1.2;
+            margin-bottom: 24px;
+        }
+
+        .repo-panel p {
+            color: var(--text-secondary);
+            font-size: 18px;
+            margin-bottom: 32px;
+        }
+
+        .repo-meta {
+            border-top: 1px solid var(--border-color);
+        }
+
+        .repo-meta div {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 18px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 15px;
+        }
+
+        .repo-meta span:first-child {
+            color: var(--text-secondary);
+        }
+
         /* 底部 CTA 与 Footer */
         .cta-section {
             text-align: center;
@@ -249,10 +337,15 @@
         /* 响应式适配 */
         @media (max-width: 768px) {
             .hero h1 { font-size: 48px; }
-            .showcase, .features-grid { grid-template-columns: 1fr; gap: 40px; }
+            .showcase, .features-grid, .demo-grid, .repo-panel { grid-template-columns: 1fr; gap: 40px; }
             nav { padding: 20px; }
+            .logo { font-size: 16px; line-height: 1.2; }
             .nav-links { display: none; }
             .section-container { padding: 60px 24px; }
+            .hero { margin: 88px auto 72px; }
+            .hero p, .section-intro { font-size: 18px; }
+            .repo-panel h2 { font-size: 32px; }
+            footer { flex-direction: column; gap: 20px; padding: 32px 24px; }
         }
     </style>
 </head>
@@ -263,10 +356,11 @@
         <div class="nav-right-group">
             <div class="nav-links">
                 <a href="#product">产品</a>
-                <a href="#research">技术底层</a>
+                <a href="#demo">真实演示</a>
+                <a href="#repo">GitHub</a>
                 <a href="#pricing">部署方案</a>
             </div>
-            <a href="#" class="btn btn-primary btn-sales">联系销售</a>
+            <a href="#pricing" class="btn btn-primary btn-sales">联系销售</a>
         </div>
     </nav>
 
@@ -274,8 +368,8 @@
         <h1>赋予机器人统一的<br>代码级理解力。</h1>
         <p>基于结构化代码表达的通用感知与决策架构。将复杂的物理世界降维，让具身智能的开发、迁移与规模化部署变得前所未有的简单。</p>
         <div class="hero-btns">
-            <a href="#" class="btn btn-primary">预约企业演示</a>
-            <a href="#" class="btn btn-secondary">阅读技术白皮书</a>
+            <a href="#demo" class="btn btn-primary">观看真实演示</a>
+            <a href="https://github.com/leiye302/CodeElement-Engine" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">进入 GitHub</a>
         </div>
     </div>
 
@@ -285,7 +379,7 @@
                 <h2>结构化语义，<br>打破硬件孤岛。</h2>
                 <p>借助码元引擎的核心 AIDL 框架，开发者无需关心底层机械臂的型号与异构系统的差异。通过高度抽象的代码动词，直接指挥机器执行复杂任务。</p>
                 <p>系统自动将语言转化为包含 Scene、Object 和 Context 的深层表征，实现跨平台的零成本迁移。</p>
-                <a href="#" style="color: #000; font-weight: 600; text-decoration: none; border-bottom: 1px solid #000;">查看 API 文档 ↗</a>
+                <a href="https://github.com/leiye302/CodeElement-Engine" target="_blank" rel="noopener noreferrer" style="color: #000; font-weight: 600; text-decoration: none; border-bottom: 1px solid #000;">查看项目仓库 ↗</a>
             </div>
             <div class="code-block">
                 <span class="comment"># 码元引擎通用任务表达接口示例</span><br><br>
@@ -305,7 +399,7 @@
     </div>
 
     <div class="section-container">
-        <h2 style="font-size: 32px; letter-spacing: -1px; text-align: center; margin-bottom: 20px;">解决规模化落地的核心壁垒</h2>
+        <h2 class="section-heading">解决规模化落地的核心壁垒</h2>
         <div class="features-grid">
             <div class="feature-card">
                 <h3>高度解耦，即插即用</h3>
@@ -322,10 +416,53 @@
         </div>
     </div>
 
+    <div class="section-container" id="demo">
+        <h2 class="section-heading">真实设备上的验证</h2>
+        <p class="section-intro">页面不只展示概念，也提供可以直接打开的机械臂演示与无人机实拍素材，便于评委、合作方和队友快速判断项目完成度。</p>
+        <div class="demo-grid">
+            <div class="demo-card">
+                <h3>机械臂任务执行</h3>
+                <p>展示从任务理解到执行动作的闭环过程，可作为答辩与销售沟通中的现场材料。</p>
+                <video class="media-frame" controls preload="metadata" poster="assets/robot-arm-poster.jpg">
+                    <source src="assets/robot-arm-demo.mp4" type="video/mp4">
+                </video>
+            </div>
+            <div class="demo-card">
+                <h3>无人机测试环境</h3>
+                <p>面向空中具身智能场景的实拍验证，呈现硬件测试空间与后续多模态接入方向。</p>
+                <img class="media-frame" src="assets/drone-demo.jpg" alt="无人机测试环境实拍">
+            </div>
+        </div>
+    </div>
+
+    <div class="section-container" id="repo">
+        <div class="repo-panel">
+            <div>
+                <h2>开放项目入口，方便继续验证。</h2>
+                <p>核心资料与后续代码沉淀到 GitHub 仓库中，评委或合作方可以从网页直接进入项目，查看工程结构、文档与更新记录。</p>
+                <a href="https://github.com/leiye302/CodeElement-Engine" class="btn btn-primary" target="_blank" rel="noopener noreferrer">打开 CodeElement-Engine</a>
+            </div>
+            <div class="repo-meta">
+                <div>
+                    <span>项目仓库</span>
+                    <span>leiye302/CodeElement-Engine</span>
+                </div>
+                <div>
+                    <span>演示素材</span>
+                    <span>机械臂 / 无人机</span>
+                </div>
+                <div>
+                    <span>适用场景</span>
+                    <span>比赛路演 / 企业展示</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="cta-section" id="pricing">
         <h2>准备好智能化升级了吗？</h2>
         <p>无论是工厂产线的私有化部署，还是机器人生态的 API 接入，我们提供灵活的解决方案。</p>
-        <a href="#" class="btn btn-primary" style="background-color: #fff; color: #000; border: none; padding: 16px 32px; font-size: 16px;">联系企业级销售与支持</a>
+        <a href="https://github.com/leiye302/CodeElement-Engine" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="background-color: #fff; color: #000; border: none; padding: 16px 32px; font-size: 16px;">进入项目 GitHub</a>
     </div>
 
     <footer>

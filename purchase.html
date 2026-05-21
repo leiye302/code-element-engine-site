@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>购买 API 调用 - 码元引擎</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --bg-color: #f7f7f7;
+            --panel-bg: #ffffff;
+            --text-primary: #000000;
+            --text-secondary: #666666;
+            --text-muted: #949494;
+            --border-color: #e4e4e4;
+            --accent: #9b98f2;
+            --accent-soft: #f3f1ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-primary);
+            line-height: 1.55;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 24px 48px;
+        }
+
+        .logo {
+            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            text-decoration: none;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .page {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 32px 48px 80px;
+        }
+
+        .hero {
+            text-align: center;
+            margin: 28px auto 44px;
+        }
+
+        .hero h1 {
+            margin-bottom: 24px;
+            font-size: 48px;
+            font-weight: 500;
+            line-height: 1.15;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 0 auto 28px;
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+
+        .switcher {
+            width: min(440px, 100%);
+            margin: 0 auto;
+            padding: 4px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border-radius: 999px;
+            background: #e8e8e8;
+        }
+
+        .switcher span,
+        .switcher a {
+            padding: 12px 18px;
+            border-radius: 999px;
+            color: #888;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .switcher .active {
+            background: #fff;
+            color: var(--text-primary);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .plan-card {
+            min-height: 620px;
+            padding: 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            background: var(--panel-bg);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .plan-card.featured {
+            border-color: #cbc8ff;
+            background: linear-gradient(180deg, var(--accent-soft), #fff 72%);
+        }
+
+        .plan-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 34px;
+        }
+
+        .plan-name {
+            font-size: 40px;
+            font-weight: 500;
+            line-height: 1;
+        }
+
+        .badge {
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: #efefef;
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .featured .badge {
+            background: #dfddff;
+            color: #4d48c9;
+        }
+
+        .price {
+            margin-bottom: 22px;
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .currency {
+            color: var(--text-muted);
+            font-size: 30px;
+        }
+
+        .amount {
+            font-size: 64px;
+            font-weight: 400;
+            letter-spacing: -1px;
+        }
+
+        .unit {
+            color: var(--text-secondary);
+            font-size: 18px;
+        }
+
+        .description {
+            min-height: 58px;
+            margin-bottom: 28px;
+            font-size: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            width: 100%;
+            padding: 14px 22px;
+            border: 1px solid var(--border-color);
+            border-radius: 999px;
+            background: #fff;
+            color: var(--text-primary);
+            font-size: 17px;
+            font-weight: 500;
+            text-align: center;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover {
+            border-color: var(--text-primary);
+        }
+
+        .btn-accent {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: #fff;
+        }
+
+        .btn-accent:hover {
+            border-color: #8580ef;
+            background: #8580ef;
+        }
+
+        .feature-list {
+            margin-top: 36px;
+            display: grid;
+            gap: 22px;
+            list-style: none;
+        }
+
+        .feature-list li {
+            display: grid;
+            grid-template-columns: 24px 1fr;
+            gap: 18px;
+            align-items: start;
+            color: #161616;
+            font-size: 17px;
+        }
+
+        .icon {
+            width: 24px;
+            height: 24px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #111;
+            font-size: 17px;
+        }
+
+        .sales {
+            margin-top: 32px;
+            padding: 36px 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            background: #fff;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 32px;
+            align-items: center;
+        }
+
+        .sales h2 {
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .sales p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .checkout {
+            margin-top: 32px;
+            padding: 36px 40px;
+            border: 1px solid var(--border-color);
+            border-radius: 18px;
+            background: #fff;
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        .checkout h2 {
+            margin-bottom: 10px;
+            font-size: 28px;
+            font-weight: 500;
+        }
+
+        .checkout p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .order-box {
+            border-top: 1px solid var(--border-color);
+        }
+
+        .order-box div {
+            display: flex;
+            justify-content: space-between;
+            gap: 24px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 15px;
+        }
+
+        .order-box span:first-child {
+            color: var(--text-secondary);
+        }
+
+        .copy-note {
+            min-height: 22px;
+            margin-top: 14px;
+            color: var(--text-muted);
+            font-size: 14px;
+        }
+
+        footer {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 0 48px 48px;
+            display: flex;
+            justify-content: space-between;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        @media (max-width: 1050px) {
+            .pricing-grid { grid-template-columns: 1fr; }
+            .plan-card { min-height: auto; }
+        }
+
+        @media (max-width: 768px) {
+            nav { padding: 20px; }
+            .logo { font-size: 16px; }
+            .nav-links a:not(:last-child) { display: none; }
+            .page { padding: 20px 20px 56px; }
+            .hero h1 { font-size: 38px; }
+            .hero p { font-size: 16px; }
+            .plan-card { padding: 28px; border-radius: 16px; }
+            .plan-name { font-size: 34px; }
+            .amount { font-size: 56px; }
+            .sales, .checkout { grid-template-columns: 1fr; padding: 28px; }
+            footer { flex-direction: column; gap: 18px; padding: 0 20px 36px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a class="logo" href="index.html">码元引擎 (Code Element Engine)</a>
+        <div class="nav-links">
+            <a href="index.html">产品</a>
+            <a href="validation.html">实机验证</a>
+            <a href="#sales">联系销售</a>
+        </div>
+    </nav>
+
+    <main class="page">
+        <section class="hero">
+            <h1>购买 API 调用</h1>
+            <p>面向开发者与中小企业的标准化调用额度。框架授权与定制部署不在本页直接售卖，统一联系销售沟通。</p>
+            <div class="switcher" aria-label="购买类型">
+                <span class="active">API 调用</span>
+                <a href="#sales">企业方案</a>
+            </div>
+        </section>
+
+        <section class="pricing-grid" aria-label="API 调用套餐">
+            <article class="plan-card">
+                <div class="plan-top">
+                    <div class="plan-name">免费版</div>
+                    <div class="badge">体验</div>
+                </div>
+                <div class="price">
+                    <span class="currency">¥</span>
+                    <span class="amount">0</span>
+                    <span class="unit">/ 一次性</span>
+                </div>
+                <p class="description">适合快速体验码元引擎的任务表达与基础 API 接入。</p>
+                <a class="btn plan-select" href="#checkout" data-plan="免费版" data-price="¥0" data-quota="1,000 次">申请免费额度</a>
+                <ul class="feature-list">
+                    <li><span class="icon">◇</span><span>授权调用 1,000 次</span></li>
+                    <li><span class="icon">↗</span><span>基础任务表达接口</span></li>
+                    <li><span class="icon">□</span><span>适合 Demo、课程和比赛验证</span></li>
+                    <li><span class="icon">◎</span><span>社区级接入支持</span></li>
+                </ul>
+            </article>
+
+            <article class="plan-card">
+                <div class="plan-top">
+                    <div class="plan-name">基础版</div>
+                    <div class="badge">常用</div>
+                </div>
+                <div class="price">
+                    <span class="currency">¥</span>
+                    <span class="amount">999</span>
+                    <span class="unit">/ 套餐</span>
+                </div>
+                <p class="description">适合小规模产品验证、机器人应用原型和团队内部试点。</p>
+                <a class="btn plan-select" href="#checkout" data-plan="基础版" data-price="¥999" data-quota="10 万次">购买基础版</a>
+                <ul class="feature-list">
+                    <li><span class="icon">◇</span><span>授权调用 10 万次</span></li>
+                    <li><span class="icon">↗</span><span>AIDL 任务表达接口</span></li>
+                    <li><span class="icon">□</span><span>调用日志与错误信息返回</span></li>
+                    <li><span class="icon">◎</span><span>邮件技术支持</span></li>
+                </ul>
+            </article>
+
+            <article class="plan-card featured">
+                <div class="plan-top">
+                    <div class="plan-name">专业版</div>
+                    <div class="badge">推荐</div>
+                </div>
+                <div class="price">
+                    <span class="currency">¥</span>
+                    <span class="amount">8999</span>
+                    <span class="unit">/ 套餐</span>
+                </div>
+                <p class="description">适合企业级 PoC、连续演示和更高频的 API 接入验证。</p>
+                <a class="btn btn-accent plan-select" href="#checkout" data-plan="专业版" data-price="¥8999" data-quota="100 万次">购买专业版</a>
+                <ul class="feature-list">
+                    <li><span class="icon">◇</span><span>授权调用 100 万次</span></li>
+                    <li><span class="icon">↗</span><span>高频 API 调用额度</span></li>
+                    <li><span class="icon">□</span><span>演示场景接入建议</span></li>
+                    <li><span class="icon">◎</span><span>优先级技术支持</span></li>
+                </ul>
+            </article>
+        </section>
+
+        <section class="checkout" id="checkout">
+            <div>
+                <h2>API 购买确认</h2>
+                <p>选择套餐后，这里会生成一段购买信息，便于发送给团队开通 API Key。正式支付、发票与密钥交付由团队确认。</p>
+            </div>
+            <div>
+                <div class="order-box">
+                    <div>
+                        <span>当前套餐</span>
+                        <span id="order-plan">专业版</span>
+                    </div>
+                    <div>
+                        <span>套餐价格</span>
+                        <span id="order-price">¥8999</span>
+                    </div>
+                    <div>
+                        <span>调用额度</span>
+                        <span id="order-quota">100 万次</span>
+                    </div>
+                </div>
+                <button class="btn btn-accent" id="copy-order" type="button" style="margin-top: 24px;">复制购买信息</button>
+                <p class="copy-note" id="copy-note"></p>
+            </div>
+        </section>
+
+        <section class="sales" id="sales">
+            <div>
+                <h2>框架授权与定制部署</h2>
+                <p>面向机器人厂商、系统集成商和大型行业客户。框架授权、私有化部署、产线级集成与长期运维合同均需联系销售确认需求。</p>
+            </div>
+            <a class="btn btn-accent" style="width: auto; min-width: 180px;" href="https://github.com/leiye302/CodeElement-Engine" target="_blank" rel="noopener noreferrer">联系销售</a>
+        </section>
+    </main>
+
+    <footer>
+        <div>© 2026 北京邮电大学 码元引擎团队</div>
+        <div>
+            <a href="index.html" style="color: inherit; text-decoration: none;">返回首页</a>
+        </div>
+    </footer>
+    <script>
+        const planButtons = document.querySelectorAll('.plan-select');
+        const orderPlan = document.querySelector('#order-plan');
+        const orderPrice = document.querySelector('#order-price');
+        const orderQuota = document.querySelector('#order-quota');
+        const copyButton = document.querySelector('#copy-order');
+        const copyNote = document.querySelector('#copy-note');
+
+        planButtons.forEach((button) => {
+            button.addEventListener('click', () => {
+                orderPlan.textContent = button.dataset.plan;
+                orderPrice.textContent = button.dataset.price;
+                orderQuota.textContent = button.dataset.quota;
+                copyNote.textContent = '';
+            });
+        });
+
+        copyButton.addEventListener('click', async () => {
+            const message = `码元引擎 API 调用购买意向：${orderPlan.textContent}，价格 ${orderPrice.textContent}，调用额度 ${orderQuota.textContent}。`;
+            try {
+                await navigator.clipboard.writeText(message);
+                copyNote.textContent = '购买信息已复制。';
+            } catch (error) {
+                copyNote.textContent = message;
+            }
+        });
+    </script>
+</body>
+</html>

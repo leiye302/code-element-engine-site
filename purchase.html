@@ -383,7 +383,7 @@
                     <span class="unit">/ 一次性</span>
                 </div>
                 <p class="description">适合快速体验码元引擎的任务表达与基础 API 接入。</p>
-                <a class="btn plan-select" href="#checkout" data-plan="免费版" data-price="¥0" data-quota="1,000 次">申请免费额度</a>
+                <a class="btn plan-select" href="#checkout" data-plan="免费版" data-price="¥0" data-quota="1,000 次" data-pay-url="">申请免费额度</a>
                 <ul class="feature-list">
                     <li><span class="icon">◇</span><span>授权调用 1,000 次</span></li>
                     <li><span class="icon">↗</span><span>基础任务表达接口</span></li>
@@ -403,7 +403,7 @@
                     <span class="unit">/ 套餐</span>
                 </div>
                 <p class="description">适合小规模产品验证、机器人应用原型和团队内部试点。</p>
-                <a class="btn plan-select" href="#checkout" data-plan="基础版" data-price="¥999" data-quota="10 万次">购买基础版</a>
+                <a class="btn plan-select" href="#checkout" data-plan="基础版" data-price="¥999" data-quota="10 万次" data-pay-url="">购买基础版</a>
                 <ul class="feature-list">
                     <li><span class="icon">◇</span><span>授权调用 10 万次</span></li>
                     <li><span class="icon">↗</span><span>AIDL 任务表达接口</span></li>
@@ -423,7 +423,7 @@
                     <span class="unit">/ 套餐</span>
                 </div>
                 <p class="description">适合企业级 PoC、连续演示和更高频的 API 接入验证。</p>
-                <a class="btn btn-accent plan-select" href="#checkout" data-plan="专业版" data-price="¥8999" data-quota="100 万次">购买专业版</a>
+                <a class="btn btn-accent plan-select" href="#checkout" data-plan="专业版" data-price="¥8999" data-quota="100 万次" data-pay-url="">购买专业版</a>
                 <ul class="feature-list">
                     <li><span class="icon">◇</span><span>授权调用 100 万次</span></li>
                     <li><span class="icon">↗</span><span>高频 API 调用额度</span></li>
@@ -482,7 +482,13 @@
         const copyNote = document.querySelector('#copy-note');
 
         planButtons.forEach((button) => {
-            button.addEventListener('click', () => {
+            button.addEventListener('click', (event) => {
+                if (button.dataset.payUrl) {
+                    event.preventDefault();
+                    window.location.href = button.dataset.payUrl;
+                    return;
+                }
+
                 orderPlan.textContent = button.dataset.plan;
                 orderPrice.textContent = button.dataset.price;
                 orderQuota.textContent = button.dataset.quota;

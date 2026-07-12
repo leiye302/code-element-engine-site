@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="了解码元引擎对齐与执行适配层如何统一坐标系、单位、时间和设备控制接口，让任务逻辑稳定迁移到不同硬件。">
+    <title>对齐与执行适配层 - 码元引擎</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="layers.css">
+</head>
+<body data-layer="adapter">
+    <nav class="site-nav">
+        <a class="brand" href="index.html" aria-label="码元引擎首页">
+            <img src="assets/code-element-logo.png" alt="">
+            <span>码元引擎</span>
+        </a>
+        <div class="nav-center" aria-label="技术层导航">
+            <a href="semantic-layer.html">语义表征</a>
+            <a href="workflow-layer.html">任务编排</a>
+            <a href="adapter-layer.html" aria-current="page">执行适配</a>
+        </div>
+        <div class="nav-actions">
+            <a href="validation.html">实机验证</a>
+            <a class="button" href="contact.html">联系销售</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="layer-hero">
+            <div class="layer-hero-copy">
+                <div class="eyebrow">Adapter Layer · 03</div>
+                <h1>抹平设备差异，让统一任务真正落到现实。</h1>
+                <p class="lead">对齐与执行适配层位于统一语义和真实硬件之间，负责转换坐标系、单位与时间基准，并把标准动作映射为设备可执行的控制信号，使同一任务逻辑能够跨设备、跨环境稳定迁移。</p>
+                <div class="hero-actions">
+                    <a class="button" href="#visual">观察实时对齐</a>
+                    <a class="button secondary" href="validation.html">查看实机验证</a>
+                </div>
+                <div class="hero-meta" aria-label="执行适配层能力摘要">
+                    <div><strong>空间对齐</strong><span>camera / world / robot</span></div>
+                    <div><strong>单位统一</strong><span>pixel / meter / radius</span></div>
+                    <div><strong>时序同步</strong><span>delay / frequency / timestamp</span></div>
+                </div>
+            </div>
+
+            <div class="visual-shell adapter-canvas" id="visual" aria-label="不同设备坐标、单位和时钟被统一对齐的动画示意">
+                <div class="visual-label">Runtime alignment</div>
+                <div class="mismatch-stack">
+                    <div class="mismatch-card" data-mismatch>
+                        <small>SPACE · MISMATCH</small><b>相机坐标 → 机器人坐标</b><span>[x, y, z] / frame_id</span>
+                    </div>
+                    <div class="mismatch-card" data-mismatch>
+                        <small>UNIT · MISMATCH</small><b>像素、米与弧度</b><span>px / m / rad</span>
+                    </div>
+                    <div class="mismatch-card" data-mismatch>
+                        <small>TIME · MISMATCH</small><b>频率与响应延迟</b><span>30Hz / 100Hz / latency</span>
+                    </div>
+                </div>
+                <div class="adapter-core" aria-hidden="true">
+                    <div class="adapter-orbit"></div>
+                    <div class="adapter-engine">
+                        <div><b>ADAPTER</b><span>ALIGN + VALIDATE</span></div>
+                    </div>
+                    <div class="adapter-state" data-adapter-state>正在转换 camera → robot 坐标</div>
+                </div>
+                <div class="aligned-stack">
+                    <div class="aligned-card">
+                        <small>SPACE · ALIGNED</small><b>统一目标位姿</b><span>robot_base / meter</span>
+                    </div>
+                    <div class="aligned-card">
+                        <small>COMMAND · READY</small><b>标准执行语义</b><span>move / grasp / place</span>
+                    </div>
+                    <div class="aligned-card">
+                        <small>RUNTIME · VERIFIED</small><b>状态一致可追踪</b><span>timestamp / feedback</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-inner">
+                <div class="section-head">
+                    <div class="section-kicker">Why it matters</div>
+                    <div>
+                        <h2>真实世界的困难，往往不在算法，而在系统之间不一致。</h2>
+                        <p>相机、机械臂、仿真环境和业务系统使用不同坐标、单位、频率与接口。适配层把这些工程差异集中处理，避免它们污染上层任务逻辑。</p>
+                    </div>
+                </div>
+                <div class="value-grid">
+                    <article class="value-card">
+                        <div class="card-number">01</div>
+                        <h3>空间关系对齐</h3>
+                        <p>统一管理相机、世界、机器人基座和末端执行器坐标系，将语义目标转换为设备可以执行的目标位姿。</p>
+                    </article>
+                    <article class="value-card">
+                        <div class="card-number">02</div>
+                        <h3>执行参数统一</h3>
+                        <p>在像素、米、弧度及设备控制参数之间完成转换，让抽象动作能够稳定映射为真实控制信号。</p>
+                    </article>
+                    <article class="value-card">
+                        <div class="card-number">03</div>
+                        <h3>虚实迁移校验</h3>
+                        <p>对仿真与真实环境的差异进行校正和验证，降低任务逻辑从 Sim 到 Real 的重复开发与现场调试负担。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-inner">
+                <div class="section-head">
+                    <div class="section-kicker">Alignment pipeline</div>
+                    <div>
+                        <h2>先对齐，再执行；先校验，再把动作交给设备。</h2>
+                        <p>适配过程不仅做格式转换，还会检查目标是否可达、参数是否有效，以及当前设备状态是否允许执行。</p>
+                    </div>
+                </div>
+                <div class="process-strip">
+                    <div class="process-step">
+                        <small>RECEIVE · 01</small>
+                        <h3>接收标准动作语义</h3>
+                        <p>上层任务图只描述“移动、抓取、放置”等能力目标，不直接依赖某一设备的控制细节。</p>
+                    </div>
+                    <div class="process-step">
+                        <small>ALIGN · 02</small>
+                        <h3>转换并校验工程参数</h3>
+                        <p>完成坐标变换、单位换算、时钟同步、延迟补偿和设备能力边界检查。</p>
+                    </div>
+                    <div class="process-step">
+                        <small>EXECUTE · 03</small>
+                        <h3>输出可执行控制信号</h3>
+                        <p>将标准动作映射到实际控制接口，并把执行状态、异常和结果返回任务工作流。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-inner split-panel">
+                <div>
+                    <div class="section-kicker">Device abstraction</div>
+                    <h2>更换设备时，保留任务逻辑，只替换适配实现。</h2>
+                    <p>上层应用持续使用统一动作语义，适配层根据设备能力选择对应驱动与参数映射，使客户已有流程能够继续复用。</p>
+                    <ul class="capability-list">
+                        <li><span>坐标变换与目标位姿生成</span><span>TF / POSE</span></li>
+                        <li><span>设备能力与参数边界校验</span><span>CAPABILITY</span></li>
+                        <li><span>状态反馈与异常映射</span><span>FEEDBACK</span></li>
+                    </ul>
+                </div>
+                <pre class="code-panel" aria-label="适配器配置示例"><span class="comment"># 同一动作，不同设备实现</span>
+adapter <span class="verb">arm_A</span>:
+  <span class="key">source_frame</span>: <span class="value">camera_01</span>
+  <span class="key">target_frame</span>: <span class="value">robot_base</span>
+  <span class="key">position_unit</span>: <span class="value">meter</span>
+  <span class="key">angle_unit</span>: <span class="value">radian</span>
+  <span class="key">clock_sync</span>: <span class="value">enabled</span>
+  <span class="key">verbs</span>:
+    <span class="verb">move_to</span>: driver.cartesian_move
+    <span class="verb">grasp</span>: driver.close_gripper
+    <span class="verb">place</span>: driver.release</pre>
+            </div>
+        </section>
+
+        <nav class="layer-switch" aria-label="浏览技术层">
+            <a href="semantic-layer.html"><small>LAYER 01</small><strong>语义表征层</strong></a>
+            <a href="workflow-layer.html"><small>LAYER 02</small><strong>任务编排与执行层</strong></a>
+            <a href="adapter-layer.html" aria-current="page"><small>LAYER 03</small><strong>对齐与执行适配层</strong></a>
+        </nav>
+
+        <section class="next-cta">
+            <div class="eyebrow">See it in action</div>
+            <h2>从统一语义，到真实设备动作。</h2>
+            <p>查看机械臂与无人机验证资料，了解码元引擎如何进入真实硬件流程。</p>
+            <a class="button" href="validation.html">查看实机验证</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>© 2026 北京邮电大学 码元引擎团队</div>
+        <div>Adapter Layer · Code Element Engine</div>
+    </footer>
+    <script src="layers.js"></script>
+</body>
+</html>

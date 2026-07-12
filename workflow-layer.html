@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="了解码元引擎任务编排与执行层如何把自然语言目标转化为可迁移、可追踪、可复用的机器人任务图。">
+    <title>任务编排与执行层 - 码元引擎</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="layers.css">
+</head>
+<body data-layer="workflow">
+    <nav class="site-nav">
+        <a class="brand" href="index.html" aria-label="码元引擎首页">
+            <img src="assets/code-element-logo.png" alt="">
+            <span>码元引擎</span>
+        </a>
+        <div class="nav-center" aria-label="技术层导航">
+            <a href="semantic-layer.html">语义表征</a>
+            <a href="workflow-layer.html" aria-current="page">任务编排</a>
+            <a href="adapter-layer.html">执行适配</a>
+        </div>
+        <div class="nav-actions">
+            <a href="validation.html">实机验证</a>
+            <a class="button" href="contact.html">联系销售</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="layer-hero">
+            <div class="layer-hero-copy">
+                <div class="eyebrow">Workflow Layer · 02</div>
+                <h1>把一句目标，编排成一条可靠的执行链路。</h1>
+                <p class="lead">任务编排与执行层将任务理解、场景状态、能力调用和异常分支组织成结构化任务图。系统不再依赖一段写死的脚本，而是能够根据实时反馈推进、暂停、重试或重新规划。</p>
+                <div class="hero-actions">
+                    <a class="button" href="#visual">观察任务图运行</a>
+                    <a class="button secondary" href="adapter-layer.html">下一层：执行适配</a>
+                </div>
+                <div class="hero-meta" aria-label="任务编排层能力摘要">
+                    <div><strong>任务图</strong><span>节点 / 条件 / 异常分支</span></div>
+                    <div><strong>能力调用</strong><span>检测 / 规划 / 抓取 / 放置</span></div>
+                    <div><strong>闭环反馈</strong><span>状态 / 日志 / 经验记忆</span></div>
+                </div>
+            </div>
+
+            <div class="visual-shell workflow-canvas" id="visual" aria-label="机器人任务图逐节点执行的动画示意">
+                <div class="visual-label">Portable workflow runtime</div>
+                <div class="workflow-map">
+                    <svg class="workflow-lines" viewBox="0 0 1000 430" preserveAspectRatio="none" aria-hidden="true">
+                        <path d="M95 118 H290 H490 H690 H900" />
+                        <path class="feedback" d="M900 118 V320 H500 V210" />
+                    </svg>
+                    <div class="workflow-node" data-workflow-node>
+                        <small>NODE 01 · PARSE</small><b>任务解析</b><span>“把零件放入回收箱”</span>
+                    </div>
+                    <div class="workflow-node" data-workflow-node>
+                        <small>NODE 02 · SCENE</small><b>场景理解</b><span>读取目标与环境状态</span>
+                    </div>
+                    <div class="workflow-node" data-workflow-node>
+                        <small>NODE 03 · DETECT</small><b>检测与定位</b><span>筛选候选操作对象</span>
+                    </div>
+                    <div class="workflow-node" data-workflow-node>
+                        <small>NODE 04 · PLAN</small><b>空间推理</b><span>生成抓取与到达路径</span>
+                    </div>
+                    <div class="workflow-node" data-workflow-node>
+                        <small>NODE 05 · EXECUTE</small><b>调用能力</b><span>执行抓取、移动与放置</span>
+                    </div>
+                    <div class="workflow-node feedback-node" data-workflow-node>
+                        <small>NODE 06 · MEMORY</small><b>反馈与沉淀</b><span>记录状态、异常与经验</span>
+                    </div>
+                </div>
+                <div class="runtime-bar">
+                    <span data-runtime-status>解析自然语言目标</span>
+                    <span class="runtime-track"><i class="runtime-progress" data-runtime-progress></i></span>
+                    <span>RUNNING</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-inner">
+                <div class="section-head">
+                    <div class="section-kicker">Why it matters</div>
+                    <div>
+                        <h2>复杂任务需要被组织，而不是被一次性猜出来。</h2>
+                        <p>任务图把每一步能力调用、条件判断和状态变化显式记录下来。当环境变化或动作失败时，系统能够定位问题发生在哪个节点，并从正确的位置继续执行。</p>
+                    </div>
+                </div>
+                <div class="value-grid">
+                    <article class="value-card">
+                        <div class="card-number">01</div>
+                        <h3>可移植</h3>
+                        <p>任务逻辑与具体设备解耦。同一任务图可以迁移到不同机械臂、移动机器人或仿真环境中继续使用。</p>
+                    </article>
+                    <article class="value-card">
+                        <div class="card-number">02</div>
+                        <h3>可复用</h3>
+                        <p>检测、定位、抓取、放置等能力被封装为标准节点，已验证流程可以沉淀为技能模板快速复用。</p>
+                    </article>
+                    <article class="value-card">
+                        <div class="card-number">03</div>
+                        <h3>可审计</h3>
+                        <p>完整保留调用链路、输入输出、状态变化和异常原因，让调试、复盘与安全审查都有明确依据。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-inner">
+                <div class="section-head">
+                    <div class="section-kicker">Closed loop</div>
+                    <div>
+                        <h2>从目标到结果，始终保留一条可以回看的路径。</h2>
+                        <p>Workflow Layer 在每个节点执行后校验结果，依据实时状态进入下一节点、触发重试或调用重新规划。</p>
+                    </div>
+                </div>
+                <div class="process-strip">
+                    <div class="process-step">
+                        <small>COMPOSE · 01</small>
+                        <h3>生成结构化任务图</h3>
+                        <p>根据任务目标和场景状态选择能力节点，并组织执行顺序、条件与异常分支。</p>
+                    </div>
+                    <div class="process-step">
+                        <small>EXECUTE · 02</small>
+                        <h3>按节点调度能力</h3>
+                        <p>依次调用感知、推理、规划与控制模块，在每一步更新进度与设备状态。</p>
+                    </div>
+                    <div class="process-step">
+                        <small>LEARN · 03</small>
+                        <h3>反馈、恢复与沉淀</h3>
+                        <p>成功轨迹进入技能模板，失败片段进入优化样本，形成持续迭代的数据闭环。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-inner split-panel">
+                <div>
+                    <div class="section-kicker">Engineering semantics</div>
+                    <h2>任务流程可见，执行状态也必须可见。</h2>
+                    <p>每个能力调用都带有统一的超时、重试、异常和恢复语义，使机器人任务能够像软件服务一样被监控和维护。</p>
+                    <ul class="capability-list">
+                        <li><span>任务节点与前置条件</span><span>PRECONDITION</span></li>
+                        <li><span>进度、状态与异常类型</span><span>OBSERVABILITY</span></li>
+                        <li><span>重试、回滚与人工接管</span><span>RECOVERY</span></li>
+                    </ul>
+                </div>
+                <pre class="code-panel" aria-label="AIDL 工作流示例"><span class="comment"># 可追踪的任务编排</span>
+workflow <span class="verb">sort_part</span>:
+  - <span class="key">detect</span>:
+      target: <span class="value">"part_017"</span>
+      timeout: <span class="value">5s</span>
+  - <span class="key">plan_grasp</span>:
+      constraint: <span class="value">collision_free</span>
+  - <span class="key">grasp</span>:
+      retry: <span class="value">2</span>
+      on_failure: <span class="verb">replan</span>
+  - <span class="key">place</span>:
+      destination: <span class="value">"recycle_bin"</span>
+  - <span class="key">report</span>:
+      persist_log: <span class="value">true</span></pre>
+            </div>
+        </section>
+
+        <nav class="layer-switch" aria-label="浏览技术层">
+            <a href="semantic-layer.html"><small>LAYER 01</small><strong>语义表征层</strong></a>
+            <a href="workflow-layer.html" aria-current="page"><small>LAYER 02</small><strong>任务编排与执行层</strong></a>
+            <a href="adapter-layer.html"><small>LAYER 03</small><strong>对齐与执行适配层</strong></a>
+        </nav>
+
+        <section class="next-cta">
+            <div class="eyebrow">Next layer</div>
+            <h2>同一条任务图，怎样在不同设备上稳定运行？</h2>
+            <p>进入对齐与执行适配层，查看系统如何处理坐标、单位、时钟和控制接口的现实差异。</p>
+            <a class="button" href="adapter-layer.html">查看执行适配层</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>© 2026 北京邮电大学 码元引擎团队</div>
+        <div>Workflow Layer · Code Element Engine</div>
+    </footer>
+    <script src="layers.js"></script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="了解码元引擎语义表征层如何将图像、点云、机器人状态与自然语言任务转化为统一、可计算的结构化代码表达。">
+    <title>语义表征层 - 码元引擎</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="layers.css">
+</head>
+<body data-layer="semantic">
+    <nav class="site-nav">
+        <a class="brand" href="index.html" aria-label="码元引擎首页">
+            <img src="assets/code-element-logo.png" alt="">
+            <span>码元引擎</span>
+        </a>
+        <div class="nav-center" aria-label="技术层导航">
+            <a href="semantic-layer.html" aria-current="page">语义表征</a>
+            <a href="workflow-layer.html">任务编排</a>
+            <a href="adapter-layer.html">执行适配</a>
+        </div>
+        <div class="nav-actions">
+            <a href="validation.html">实机验证</a>
+            <a class="button" href="contact.html">联系销售</a>
+        </div>
+    </nav>
+
+    <main>
+        <section class="layer-hero">
+            <div class="layer-hero-copy">
+                <div class="eyebrow">Semantic Layer · 01</div>
+                <h1>让物理世界，先变成可计算的代码世界。</h1>
+                <p class="lead">语义表征层把图像、点云、设备状态和自然语言目标组织成统一的 SceneCode、ObjectCode 与 ContextCode，让后续推理不再面对零散数据，而是面对结构清晰、单位明确、可以直接调用的任务对象。</p>
+                <div class="hero-actions">
+                    <a class="button" href="#visual">查看转换过程</a>
+                    <a class="button secondary" href="workflow-layer.html">下一层：任务编排</a>
+                </div>
+                <div class="hero-meta" aria-label="语义层能力摘要">
+                    <div><strong>多模态输入</strong><span>视觉 / 点云 / 状态 / 语言</span></div>
+                    <div><strong>统一表达</strong><span>Scene / Object / Context</span></div>
+                    <div><strong>显式约束</strong><span>坐标 / 单位 / 时间戳</span></div>
+                </div>
+            </div>
+
+            <div class="visual-shell semantic-canvas" id="visual" aria-label="多模态输入转换为结构化代码对象的动画示意">
+                <div class="visual-label">Live semantic encoding</div>
+                <div class="signal-stack">
+                    <div class="signal-card"><b>图像与视频</b><small>RGB / RGB-D / FRAME</small></div>
+                    <div class="signal-card"><b>三维点云</b><small>XYZ / NORMAL / MESH</small></div>
+                    <div class="signal-card"><b>机器人状态</b><small>POSE / FORCE / JOINT</small></div>
+                    <div class="signal-card"><b>自然语言目标</b><small>INTENT / CONSTRAINT</small></div>
+                </div>
+                <div class="flow-rail" aria-hidden="true"></div>
+                <div class="semantic-core" aria-hidden="true">
+                    <div class="semantic-ring"></div>
+                    <div class="semantic-ring ring-two"></div>
+                    <div class="core-cube">CODE</div>
+                </div>
+                <div class="flow-rail" aria-hidden="true"></div>
+                <div class="code-object" aria-label="结构化代码输出示例">
+                    <div class="line"><span class="token">SCENE</span> warehouse_A</div>
+                    <div class="line"><span class="token">OBJECT</span> part_017</div>
+                    <div class="line">pose: <span class="data">[1.24, 0.45, 0.78]</span></div>
+                    <div class="line">unit: <span class="data">meter</span></div>
+                    <div class="line">relation: <span class="data">on(workbench)</span></div>
+                    <div class="line">affordance: <span class="data">graspable</span></div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-inner">
+                <div class="section-head">
+                    <div class="section-kicker">Why it matters</div>
+                    <div>
+                        <h2>感知结果只有被统一表达，才能真正进入决策链路。</h2>
+                        <p>传统感知模块往往只给出类别、检测框或点云坐标。语义表征层进一步补齐对象关系、任务上下文和工程约束，让“看见了什么”转化为“接下来可以对它做什么”。</p>
+                    </div>
+                </div>
+                <div class="value-grid">
+                    <article class="value-card">
+                        <div class="card-number">01</div>
+                        <h3>统一表达</h3>
+                        <p>将不同来源、不同维度的数据放入同一结构，减少模块之间对字段含义和数据格式的重复约定。</p>
+                    </article>
+                    <article class="value-card">
+                        <div class="card-number">02</div>
+                        <h3>可计算表示</h3>
+                        <p>对象、空间关系与任务条件都可以被查询、比较和组合，为空间推理与任务规划提供稳定输入。</p>
+                    </article>
+                    <article class="value-card">
+                        <div class="card-number">03</div>
+                        <h3>世界模型底座</h3>
+                        <p>把几何、语义和上下文组织成可持续更新的场景状态，使系统能够理解环境变化而不是只处理单帧结果。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-inner">
+                <div class="section-head">
+                    <div class="section-kicker">How it works</div>
+                    <div>
+                        <h2>从原始观测，到可推理的任务对象。</h2>
+                        <p>每一步都保留来源、坐标、单位和时间信息，使语义结果能够被复现、验证，并安全地传递给下一层。</p>
+                    </div>
+                </div>
+                <div class="process-strip">
+                    <div class="process-step">
+                        <small>INPUT · 01</small>
+                        <h3>采集多模态观测</h3>
+                        <p>接收视觉、点云、传感器状态、机器人自身状态以及自然语言任务。</p>
+                    </div>
+                    <div class="process-step">
+                        <small>ENCODE · 02</small>
+                        <h3>生成三类代码对象</h3>
+                        <p>SceneCode 描述全局场景，ObjectCode 描述实体与可操作区域，ContextCode 描述任务与约束。</p>
+                    </div>
+                    <div class="process-step">
+                        <small>OUTPUT · 03</small>
+                        <h3>交付统一语义状态</h3>
+                        <p>输出可供空间推理、任务编排和设备适配直接消费的结构化对象。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="section-inner split-panel">
+                <div>
+                    <div class="section-kicker">Structured output</div>
+                    <h2>机器看到的不再是一组像素，而是一个可行动的对象。</h2>
+                    <p>结构化结果不仅说明目标是什么，也明确它在哪里、与谁相关、能否操作，以及当前任务允许系统做什么。</p>
+                    <ul class="capability-list">
+                        <li><span>场景与对象关系网络</span><span>SceneCode</span></li>
+                        <li><span>几何、位姿与可操作区域</span><span>ObjectCode</span></li>
+                        <li><span>任务目标、状态与业务约束</span><span>ContextCode</span></li>
+                    </ul>
+                </div>
+                <pre class="code-panel" aria-label="ObjectCode 示例"><span class="comment">// 统一对象表达</span>
+{
+  <span class="key">"object_id"</span>: <span class="value">"part_017"</span>,
+  <span class="key">"type"</span>: <span class="value">"workpiece"</span>,
+  <span class="key">"pose"</span>: {
+    <span class="key">"frame"</span>: <span class="value">"camera_01"</span>,
+    <span class="key">"xyz"</span>: [1.24, 0.45, 0.78],
+    <span class="key">"unit"</span>: <span class="value">"meter"</span>
+  },
+  <span class="key">"relations"</span>: [<span class="value">"on:workbench"</span>],
+  <span class="key">"affordance"</span>: [<span class="value">"graspable"</span>]
+}</pre>
+            </div>
+        </section>
+
+        <nav class="layer-switch" aria-label="浏览技术层">
+            <a href="semantic-layer.html" aria-current="page"><small>LAYER 01</small><strong>语义表征层</strong></a>
+            <a href="workflow-layer.html"><small>LAYER 02</small><strong>任务编排与执行层</strong></a>
+            <a href="adapter-layer.html"><small>LAYER 03</small><strong>对齐与执行适配层</strong></a>
+        </nav>
+
+        <section class="next-cta">
+            <div class="eyebrow">Next layer</div>
+            <h2>统一表达之后，任务如何被可靠地执行？</h2>
+            <p>进入任务编排与执行层，查看自然语言目标如何变成可迁移、可追踪的任务图。</p>
+            <a class="button" href="workflow-layer.html">查看任务编排层</a>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div>© 2026 北京邮电大学 码元引擎团队</div>
+        <div>Semantic Layer · Code Element Engine</div>
+    </footer>
+    <script src="layers.js"></script>
+</body>
+</html>

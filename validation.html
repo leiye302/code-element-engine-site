@@ -201,13 +201,6 @@
             color: var(--text-secondary);
         }
 
-        .two-column {
-            display: grid;
-            grid-template-columns: 0.9fr 1.1fr;
-            gap: 56px;
-            align-items: center;
-        }
-
         .steps {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -267,7 +260,7 @@
             .hero h1 { font-size: 44px; }
             .hero p { font-size: 18px; }
             .section { padding: 60px 24px; }
-            .validation-grid, .two-column, .steps { grid-template-columns: 1fr; gap: 40px; }
+            .validation-grid, .steps { grid-template-columns: 1fr; gap: 40px; }
             h2, .cta h2 { font-size: 32px; }
             footer { flex-direction: column; gap: 18px; padding: 32px 24px; }
         }
@@ -290,9 +283,8 @@
     <main>
         <section class="hero">
             <h1>从结构化语义到真实动作。</h1>
-            <p>我们把机械臂演示与无人机测试资料单独整理在这里，让评委和客户可以直接看到项目从算法概念走向硬件验证的过程。</p>
+            <p>通过机械臂任务演示，了解码元引擎从环境感知、任务编排到设备执行的完整流程。</p>
             <a href="#robot-arm" class="btn btn-primary">查看机械臂验证</a>
-            <a href="#drone" class="btn btn-secondary" style="margin-left: 12px;">查看无人机试飞</a>
         </section>
 
         <section class="section" id="robot-arm">
@@ -322,33 +314,6 @@
             </div>
         </section>
 
-        <section class="section" id="drone">
-            <div class="two-column">
-                <div>
-                    <div class="eyebrow">Drone Flight Validation</div>
-                    <h2>无人机试飞视频</h2>
-                    <p class="copy">无人机试飞素材用于说明码元引擎的目标不局限于单一机械臂，而是面向多形态具身智能设备，并具备继续接入飞行控制与任务日志的空间。</p>
-                    <div class="fact-list">
-                        <div>
-                            <span>验证方向</span>
-                            <span>空中具身智能</span>
-                        </div>
-                        <div>
-                            <span>当前资料</span>
-                            <span>试飞视频</span>
-                        </div>
-                        <div>
-                            <span>后续补充</span>
-                            <span>控制接口 / 日志</span>
-                        </div>
-                    </div>
-                </div>
-                <video class="media-frame" controls preload="metadata" poster="assets/drone-flight-poster.jpg">
-                    <source src="assets/drone-flight.mp4" type="video/mp4">
-                </video>
-            </div>
-        </section>
-
         <section class="section">
             <div class="steps">
                 <div class="step">
@@ -374,7 +339,7 @@
     </main>
 
     <footer>
-        <div>© 2026 北京邮电大学 码元引擎团队</div>
+        <div>© 码元引擎团队</div>
         <div>
             <a href="index.html" style="color: inherit; text-decoration: none;">返回首页</a>
         </div>

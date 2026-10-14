@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>扫码支付演示 - 码元引擎</title>
+    <title>微信扫码支付 - 码元引擎</title>
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
@@ -226,9 +226,9 @@
     <main class="page">
         <section class="pay-panel">
             <div>
-                <div class="eyebrow">Scan to Pay</div>
-                <h1>扫码支付</h1>
-                <p class="desc">在此查看所选套餐的扫码支付流程演示。如有套餐咨询、框架授权或定制部署需求，可另行联系销售。</p>
+                <div class="eyebrow">WeChat Pay</div>
+                <h1>微信扫码支付</h1>
+                <p class="desc">请核对当前套餐与金额。如有套餐咨询、框架授权、定制部署等其他需求，可联系销售。</p>
                 <div class="order">
                     <div>
                         <span>当前套餐</span>
@@ -249,8 +249,8 @@
                 </div>
             </div>
             <figure class="qr-card">
-                <img src="assets/payment-demo-qr.svg" width="370" height="370" alt="扫码支付演示二维码，不用于实际收款" aria-describedby="qr-caption">
-                <figcaption class="qr-caption" id="qr-caption">演示二维码 · 不用于实际收款</figcaption>
+                <img src="assets/payment-demo-qr.svg" width="370" height="370" alt="微信扫码支付功能展示" aria-describedby="qr-caption">
+                <figcaption class="qr-caption" id="qr-caption">支付功能展示</figcaption>
             </figure>
         </section>
     </main>
@@ -274,7 +274,7 @@
         document.querySelector('#plan-name').textContent = plan.name;
         document.querySelector('#plan-price').textContent = plan.price;
         document.querySelector('#plan-quota').textContent = plan.quota;
-        document.title = `${plan.name}扫码支付演示 - 码元引擎`;
+        document.title = `${plan.name}微信扫码支付 - 码元引擎`;
     </script>
 </body>
 </html>
